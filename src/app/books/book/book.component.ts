@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookComponent implements OnInit {
 
+  buttonActive = false;
+  buttonText = 'Click me';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeButton() {
+    this.buttonActive = !this.buttonActive;
   }
 
 }
