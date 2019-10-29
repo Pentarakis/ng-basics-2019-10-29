@@ -1,0 +1,6 @@
+1. Book Klasse erstellen (Attribute: id, name, isbn)
+2. BookListComponent erzeugen
+3. BookListComponent statt der BookComponent im Routing verlinken
+4. Array mit Books in der BookListComponent erzeugen
+Beipieldaten: https://github.com/Pentarakis/ng-basics2/blob/master/data.ts
+5. Im Template alle Bücher aus der BookListComponent anzeigen
