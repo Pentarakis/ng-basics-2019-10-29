@@ -1,0 +1,13 @@
+<p>{{character?.name}}</p>
+<form *ngIf="character" (ngSubmit)="saveCharacter(character)">
+  <div>
+    <label for="name">Name: </label>
+    <input #formName="ngModel" name="name" [(ngModel)]="character.name" required>
+    <span *ngIf="formName.errors?.required">Feld ist ein Pflichtfeld</span>
+  </div>
+  <div>
+    <label for="isbn">Culture: </label>
+    <input name="isbn" [(ngModel)]="character.culture">
+  </div>
+  <button type="submit">Speichern</button>
+</form>

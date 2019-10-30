@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BasicLayoutModule } from './basic-layout/basic-layout.module';
 import { BooksModule } from './books/books.module';
+import { CharacterModule } from './character/character.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BooksModule } from './books/books.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     BasicLayoutModule,
-    BooksModule
+    BooksModule,
+    CharacterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
