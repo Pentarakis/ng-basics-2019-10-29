@@ -4,6 +4,7 @@ import { CharacterComponent } from './character/character.component';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CharactersRoutingModule } from './characters-routing.module';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    CharactersRoutingModule
   ]
 })
 export class CharacterModule { }
