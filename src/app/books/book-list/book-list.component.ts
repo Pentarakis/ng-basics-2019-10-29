@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Book } from '../model/book';
 import { BookService } from '../book.service';
 
@@ -15,7 +15,7 @@ export class BookListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'isbn'];
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private changeDetectorRefs: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.books = this.bookService.getBooks();
@@ -27,6 +27,7 @@ export class BookListComponent implements OnInit {
 
   saveNewBook(book: Book) {
     this.bookService.saveBook(book);
+    this.changeDetectorRefs.detectChanges();
   }
 
 }
