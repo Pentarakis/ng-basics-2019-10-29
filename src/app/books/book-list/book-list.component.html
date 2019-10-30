@@ -1,20 +1,35 @@
 <ngb-book [book]="selectedBook" (newBook)="saveNewBook($event)"></ngb-book>
 
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>ISBN</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books" (click)="selectBook(book)">
-      <td>{{book.id}}</td>
-      <td>{{book.name}}</td>
-      <td>{{book.isbn}}</td>
-    </tr>
-  </tbody>
-</table>
+<mat-card>
 
-<p>SelectedBook: {{selectedBook?.name}}</p>
+  <mat-card-header>Book List</mat-card-header>
+
+  <mat-card-content>
+
+    <table mat-table [dataSource]="books">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let book"> {{book.id}} </td>
+      </ng-container>
+
+      <!-- NAME Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let book"> {{book.name}} </td>
+      </ng-container>
+
+      <!-- ISBN Column -->
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef> ISBN </th>
+        <td mat-cell *matCellDef="let book"> {{book.isbn}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let book; columns: displayedColumns;" (click)="selectBook(book)"></tr>
+
+    </table>
+  </mat-card-content>
+
+</mat-card>

@@ -1,12 +1,22 @@
-<form *ngIf="book" (ngSubmit)="saveBook(book)">
-  <div>
-    <label for="name">Name: </label>
-    <input #formName="ngModel" name="name" [(ngModel)]="book.name" required>
-    <span *ngIf="formName.errors?.required">Feld ist ein Pflichtfeld</span>
-  </div>
-  <div>
-    <label for="isbn">ISBN: </label>
-    <input name="isbn" [(ngModel)]="book.isbn">
-  </div>
-  <button type="submit">Speichern</button>
-</form>
+<mat-card>
+
+  <mat-card-header>Edit Book</mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="saveBook(book)">
+
+      <mat-form-field>
+        <input #name="ngModel" matInput name="name" placeholder="Name" [(ngModel)]="book.name" required>
+        <mat-error *ngIf="name.errors?.required">Required!</mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <input matInput name="isbn" [(ngModel)]="book.isbn" placeholder="ISBN">
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+
+</mat-card>

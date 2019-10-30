@@ -13,6 +13,8 @@ export class BookListComponent implements OnInit {
 
   books: Book[] = [];
 
+  displayedColumns: string[] = ['id', 'name', 'isbn'];
+
   constructor(private bookService: BookService) { }
 
   ngOnInit() {
