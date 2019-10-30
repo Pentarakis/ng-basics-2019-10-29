@@ -15,7 +15,7 @@ export class CharacterComponent implements OnInit {
   isCreateMode = true;
 
   constructor(private activateRoute: ActivatedRoute,
-              private characterService: CharacterService) { }
+    private characterService: CharacterService) { }
 
   ngOnInit() {
 
@@ -25,11 +25,15 @@ export class CharacterComponent implements OnInit {
         filter(id => id !== 'create'),
         switchMap(id => this.characterService.getCharacterById(Number(id)))
       )
-      .subscribe((character: Character) => this.character = character);
+      .subscribe((character: Character) => {
+        this.isCreateMode = false;
+        this.character = character;
+      });
   }
 
   saveCharacter(character: Character) {
-    this.characterService.createCharacter(character);
+    this.characterService.updateCharacter(character)
+      .subscribe(() => { });
     this.character = new Character();
   }
 
