@@ -1,3 +1,5 @@
+<ngb-book [book]="selectedBook" (newBook)="saveNewBook($event)"></ngb-book>
+
 <table>
   <thead>
     <tr>
@@ -7,10 +9,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let book of books">
+    <tr *ngFor="let book of books" (click)="selectBook(book)">
       <td>{{book.id}}</td>
       <td>{{book.name}}</td>
       <td>{{book.isbn}}</td>
     </tr>
   </tbody>
 </table>
+
+<p>SelectedBook: {{selectedBook?.name}}</p>

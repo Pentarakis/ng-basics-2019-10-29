@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Book } from '../model/book';
 
 @Component({
   selector: 'ngb-book',
@@ -7,16 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookComponent implements OnInit {
 
-  buttonActive = false;
-  buttonText = 'Click me';
+  @Input() book: Book = new Book();
+
+  @Output() newBook: EventEmitter<Book> = new EventEmitter<Book>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  changeButton() {
-    this.buttonActive = !this.buttonActive;
+  saveBook(book: Book) {
+    if (!book.id) {
+      this.newBook.emit(book);
+    }
+
+    this.book = new Book();
   }
+
 
 }

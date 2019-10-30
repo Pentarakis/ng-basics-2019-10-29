@@ -1,4 +1,12 @@
-<p>book works!</p>
-<button [class.active]="buttonActive" (click)="changeButton()">
-  {{buttonText}}
-</button>
+<form *ngIf="book" (ngSubmit)="saveBook(book)">
+  <div>
+    <label for="name">Name: </label>
+    <input #formName="ngModel" name="name" [(ngModel)]="book.name" required>
+    <span *ngIf="formName.errors?.required">Feld ist ein Pflichtfeld</span>
+  </div>
+  <div>
+    <label for="isbn">ISBN: </label>
+    <input name="isbn" [(ngModel)]="book.isbn">
+  </div>
+  <button type="submit">Speichern</button>
+</form>
