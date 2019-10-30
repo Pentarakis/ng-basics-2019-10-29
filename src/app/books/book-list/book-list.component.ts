@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../model/book';
+import { BookService } from '../book.service';
 
 @Component({
   selector: 'ngb-book-list',
@@ -10,15 +11,12 @@ export class BookListComponent implements OnInit {
 
   selectedBook: Book = new Book();
 
-  books: Book[] = [
-    { id: 3, name: 'A Storm of Swords', isbn: '978-0553106633' },
-    { id: 4, name: 'The Hedge Knight', isbn: '978-0976401100' },
-    { id: 5, name: 'A Feast for Crows', isbn: '978-0553801507' }
-  ];
+  books: Book[] = [];
 
-  constructor() { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit() {
+    this.books = this.bookService.getBooks();
   }
 
   selectBook(book: Book) {
@@ -26,8 +24,7 @@ export class BookListComponent implements OnInit {
   }
 
   saveNewBook(book: Book) {
-    book.id = this.books[this.books.length - 1].id;
-    this.books.push(book);
+    this.bookService.saveBook(book);
   }
 
 }
