@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CharacterComponent } from './character/character.component';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CharactersRoutingModule } from './characters-routing.module';
 
 
@@ -13,7 +13,7 @@ import { CharactersRoutingModule } from './characters-routing.module';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule,
+    ReactiveFormsModule,
     CharactersRoutingModule
   ]
 })

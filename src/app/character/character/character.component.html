@@ -1,13 +1,13 @@
-<p>{{character?.name}}</p>
-<form *ngIf="character" (ngSubmit)="saveCharacter(character)">
+<form (ngSubmit)="saveCharacter()"
+      [formGroup]="characterForm">
   <div>
     <label for="name">Name: </label>
-    <input #formName="ngModel" name="name" [(ngModel)]="character.name" required>
-    <span *ngIf="formName.errors?.required">Feld ist ein Pflichtfeld</span>
+    <input name="name" formControlName="name">
+    <span *ngIf="characterForm.get('name').hasError('required')">Feld ist ein Pflichtfeld</span>
   </div>
   <div>
     <label for="isbn">Culture: </label>
-    <input name="isbn" [(ngModel)]="character.culture">
+    <input name="isbn" formControlName="culture">
   </div>
   <button type="submit">Speichern</button>
 </form>

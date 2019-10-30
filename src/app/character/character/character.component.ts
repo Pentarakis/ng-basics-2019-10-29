@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { filter, first, pluck, switchMap } from 'rxjs/operators';
 import { Character } from '../character';
@@ -11,13 +12,18 @@ import { CharacterService } from '../character.service';
 })
 export class CharacterComponent implements OnInit {
 
-  character: Character = new Character();
   isCreateMode = true;
 
+  characterForm: FormGroup;
+
   constructor(private activateRoute: ActivatedRoute,
-    private characterService: CharacterService) { }
+              private characterService: CharacterService,
+              private fb: FormBuilder) {
+  }
 
   ngOnInit() {
+
+    this.initForm();
 
     this.activateRoute.params
       .pipe(
@@ -27,14 +33,26 @@ export class CharacterComponent implements OnInit {
       )
       .subscribe((character: Character) => {
         this.isCreateMode = false;
-        this.character = character;
+        this.characterForm.patchValue(character);
       });
   }
 
-  saveCharacter(character: Character) {
-    this.characterService.updateCharacter(character)
-      .subscribe(() => { });
-    this.character = new Character();
+  saveCharacter() {
+    if (!this.characterForm.valid) {
+      return;
+    }
+    this.characterService.updateCharacter(this.characterForm.getRawValue())
+      .subscribe(() => {
+      });
+    this.characterForm.patchValue(new Character());
+  }
+
+  private initForm() {
+    this.characterForm = this.fb.group({
+      id : [null, Validators.required],
+      name : [null, Validators.required],
+      culture : null
+    });
   }
 
 }
