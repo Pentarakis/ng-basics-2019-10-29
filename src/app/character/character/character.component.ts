@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { filter, first, pluck, switchMap } from 'rxjs/operators';
 import { Character } from '../character';
 import { CharacterService } from '../character.service';
 
@@ -10,14 +11,21 @@ import { CharacterService } from '../character.service';
 })
 export class CharacterComponent implements OnInit {
 
-  character: Character;
+  character: Character = new Character();
+  isCreateMode = true;
 
   constructor(private activateRoute: ActivatedRoute,
               private characterService: CharacterService) { }
 
   ngOnInit() {
-    const id = parseInt(this.activateRoute.snapshot.params.id, 10);
-    this.character = this.characterService.getCharacterById(id);
+
+    this.activateRoute.params
+      .pipe(
+        pluck('id'),
+        filter(id => id !== 'create'),
+        switchMap(id => this.characterService.getCharacterById(Number(id)))
+      )
+      .subscribe((character: Character) => this.character = character);
   }
 
   saveCharacter(character: Character) {

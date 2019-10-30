@@ -20,6 +20,6 @@ export class BookService {
   }
 
   getBooks() {
-    return this.books;
+    return [].concat(this.books);
   }
 }

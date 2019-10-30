@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { retry } from 'rxjs/operators';
 import { Character } from './character';
 
 @Injectable({
@@ -6,19 +9,21 @@ import { Character } from './character';
 })
 export class CharacterService {
 
+  private readonly baseUrl = 'http://localhost:3000/characters';
+
   private characters: Character[] = [
     { id: 1, name: 'Daenerys Targaryen', culture: 'Valyrian' },
     { id: 2, name: 'Jon Snow', culture: 'Northmen' }
   ];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getCharacter(): Character[] {
     return this.characters;
   }
 
-  getCharacterById(id: number): Character {
-    return this.characters.find(character => character.id === id);
+  getCharacterById(id: number): Observable<Character> {
+    return this.httpClient.get<Character>(`${this.baseUrl}/${id}`);
   }
 
   createCharacter(character: Character) {
